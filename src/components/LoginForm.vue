@@ -15,7 +15,7 @@ import useLogin from '@/composables/useLogin'
 
 export default {
 
-    setup(){
+    setup(props, context){
 
         const {error, login} = useLogin() //composable function 'useLogin'
         //ref
@@ -23,9 +23,9 @@ export default {
         const password = ref('')
 
         const handleSubmit= async() => {
-            await login(email.value, password.value)
+            await login(email.value, password.value) //after the click event it will pass the user data to login function which is in 'useLogin'
             if(!error.value){
-                console.log('user login success')   
+                context.emit('login')   
             }
                    
         }
