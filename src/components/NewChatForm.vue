@@ -28,7 +28,7 @@
         setup(){
 
             const { user } = getUser()
-            const {addDoc, error} = useCollection('messages')
+            const {addDoc, error} = useCollection('messages') 
             const message = ref('')
 
             const handleSubmit = async() => {

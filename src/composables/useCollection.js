@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 import { projectFirestore } from '../firebase/config'
 
+//this composable function is used to store the messages from  NewChatForm 
+// keep in mind ..Not to retrieve collection  
 
 const useCollection = (collection) => {
     const error = ref(null)
