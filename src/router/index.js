@@ -4,18 +4,27 @@ import Chatroom from '@/views/Chatroom'
 import { projectAuth } from '../firebase/config'
 
 
-//require guard
+//auth guard
 
 const requireAuth = (to, from, next) => {
   
   let user = projectAuth.currentUser
   console.log('current user:', user)
   if (!user) { //if current user is null ; redirect to welcome page 
-    next({name: 'Welcome'})
+    next({ name: 'Welcome' })
   } else {
     next()
   }
   
+}
+
+const requireNoAuth = (to, from, next) => {
+  let user = projectAuth.currentUser
+  if (user) { //if current user is null ; redirect to welcome page 
+    next({ name: 'Chatroom' })
+  } else {
+    next()
+  }
 }
 
 
@@ -23,7 +32,8 @@ const routes = [
   {
     path: '/',
     name: 'Welcome',
-    component: Welcome
+    component: Welcome,
+    beforeEnter: requireNoAuth
   },
   {
     path: '/chatroom',
