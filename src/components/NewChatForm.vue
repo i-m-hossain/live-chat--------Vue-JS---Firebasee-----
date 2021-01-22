@@ -1,5 +1,6 @@
 <template>
     <form action="">
+        
         <textarea 
             placeholder="Type a message and hit enter to send" 
             cols="10" rows="5" 
@@ -8,6 +9,9 @@
             >
             
         </textarea>
+        <div class="error">
+            {{error}}
+        </div>
 
     </form>
   
@@ -18,15 +22,17 @@
     import { ref } from 'vue'
     import getUser from '@/composables/getUser'
     import {timestamp} from '../firebase/config'
+    import useCollection from '@/composables/useCollection'
 
     export default {
         setup(){
 
             const { user } = getUser()
+            const {addDoc, error} = useCollection('messages')
             const message = ref('')
 
             const handleSubmit = async() => {
-                const chat ={  //the user name, message and timestamp is saved in anm object
+                const chat ={  //the user name, message and timestamp is saved in an object
 
                     name: user.value.displayName,
                     message: message.value  ,
@@ -34,11 +40,15 @@
                     
                 }
 
-                console.log(chat);
-                message.value = '' //after the enter the message value is made null
+                await addDoc(chat)
+                if(!error.value){
+                     message.value = '' 
+
+                }
+               //after the enter the message value is made null
             }
 
-            return {message, handleSubmit}
+            return {message, handleSubmit, error}
         
         }
     }
