@@ -27,7 +27,7 @@ export default {
         const showLogin = ref(true)
         const router = useRouter()
 
-        const enterChat= () => {
+        const enterChat= () => {  //cutom method emitted from loginform and sign up form
            router.push({name: 'Chatroom'})
         }
     

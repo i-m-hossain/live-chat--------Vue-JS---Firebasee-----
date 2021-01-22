@@ -13,6 +13,7 @@
 import useLogout from '@/composables/useLogout'
 import getUser from '@/composables/getUser'
 
+
 export default {
 
     setup(){
@@ -22,8 +23,7 @@ export default {
         const handleClick =async() => {
             await logout()
             if(!error.value){
-
-                console.log('user logged out'); 
+                
             }
         }
 
