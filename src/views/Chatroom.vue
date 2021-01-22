@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <NavBar @logout="exitChat"/>  
+    <NavBar/>  
   </div>
 </template>
 
@@ -12,11 +12,12 @@ import {useRouter} from 'vue-router'
 export default {
     components: {NavBar},
     setup(){
+        
         const router = useRouter()
 
-        const exitChat= () => {
-           router.push({name: 'Welcome'})
-        }
+        // const exitChat= () => {
+        //    router.push({name: 'Welcome'})
+        // }
     }
 
 }
