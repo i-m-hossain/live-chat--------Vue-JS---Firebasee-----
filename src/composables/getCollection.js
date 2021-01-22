@@ -6,8 +6,10 @@ const getCollection = (collection) => {
     
     const documents = ref(null)
     const error = ref(null)
-    let collectionRef = projectFirestore.collection(coollection).orderBy('createdAt')
+    let collectionRef = projectFirestore.collection(collection).orderBy('createdAt')
     
+    //real time listenner
+
     collectionRef.onSnapshot((snap) => {
         let results = []
         snap.docs.forEach(doc => {
@@ -21,7 +23,8 @@ const getCollection = (collection) => {
     }, (err) => {
             
         console.log(err.message);    
-        documents.value = nullerror.value = 'could not fetch data'
+        documents.value = null
+        error.value = 'could not fetch data'
     })
 
     return { documents, error}
